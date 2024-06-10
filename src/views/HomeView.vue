@@ -27,24 +27,9 @@ function loadData(): void {
       })
       .catch((error) => console.log("error: " + error))
 
-  //const endpoint = 'http://localhost:8080/legoFlowers'
-  //const requestOptions = {
-  //  method: 'GET',
-  //  redirect: 'follow'
-  //}
-  //fetch(endpoint, requestOptions)
-  //    .then(response => response.json())
-  //    .then(result => result.forEach(flower => {
-  //      this.flowerList.push(flower)
-  //    }))
-  //  .catch( error =>  console.log("error: " + error.error))
-
-  console.log("flowerlist: " + flowerList)
 }
 
-onMounted(() =>
-  loadData()
-)
+onMounted(() => loadData())
 
 
 </script>
