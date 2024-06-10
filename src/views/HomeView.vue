@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ListItem from '@/components/ListItem.vue'
 import type { LegoFlowerDto } from '@/types/legoFlower'
-import { onMounted } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import axios from 'axios'
 
 //const flowerList = [
@@ -10,7 +10,7 @@ import axios from 'axios'
 //  {name: "primrose", number_of_pieces: 50, difficulty: "easy"}
 //] as LegoFlowerDto[]
 
-const flowerList = [] as LegoFlowerDto
+const flowerList : Ref<LegoFlowerDto[]> = ref([])
 
 const flowerImages = {
   sunflower: "@assets/imgs/sunflower-square.png",
@@ -22,8 +22,7 @@ function loadData(): void {
   axios
       .get<LegoFlowerDto[]>('http://localhost:8080/legoFlowers')
       .then((response) => {
-        flowerList.push(response.data)
-        console.log("backend data: " + response.data)
+        flowerList.value = response.data
       })
       .catch((error) => console.log("error: " + error))
 
