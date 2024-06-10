@@ -4,12 +4,6 @@ import type { LegoFlowerDto } from '@/types/legoFlower'
 import { onMounted, ref, type Ref } from 'vue'
 import axios from 'axios'
 
-//const flowerList = [
-//  {name: "sunflower", number_of_pieces: 200, difficulty: "hard"},
-//  {name: "tulip", number_of_pieces: 100, difficulty: "medium"},
-//  {name: "primrose", number_of_pieces: 50, difficulty: "easy"}
-//] as LegoFlowerDto[]
-
 const flowerList : Ref<LegoFlowerDto[]> = ref([])
 
 const flowerImages = {
@@ -18,14 +12,15 @@ const flowerImages = {
   primrose: "@assets/imgs/primrose-square.png"
 }
 
+const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+
 function loadData(): void {
   axios
-      .get<LegoFlowerDto[]>('http://localhost:8080/legoFlowers')
+      .get<LegoFlowerDto[]>(`${baseUrl}/legoFlowers`)
       .then((response) => {
         flowerList.value = response.data
       })
       .catch((error) => console.log("error: " + error))
-
 }
 
 onMounted(() => loadData())
